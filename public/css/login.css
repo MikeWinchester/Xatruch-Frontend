@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(245, 245, 245);
+    background-image: url(../img/flight.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    font-family: "Google Sans",arial,sans-serif;
+}
+
+#opacity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 100vh;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(164, 140, 140, 0.1);
+    text-align: center;
+}
+
+.logo {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #5144b1;
+    width: 100%;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #332885;
+    transition: all .1s ease-in;
+}
+
+#register-opt{
+    align-self: center;
+    font-size: .8rem;
+}
+
+#register-opt a{
+    text-decoration: none;
+    color: blue;
+    transition: all .1s ease-in;
+}
+
+#register-opt a:hover{
+    text-decoration: underline;
+    color: purple;
+}
