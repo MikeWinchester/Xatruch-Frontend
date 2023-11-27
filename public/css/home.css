@@ -73,32 +73,60 @@ nav {
     }
 }
 
-.botones-centrados {
-    display: flex;
-    height: 75vh;
-    margin-top: 20px;
-    align-items: center;
-    justify-content: space-around;
-}
 
-.botones-centrados button {
+#cont-flight {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px;
-    font-size: 16px;
-    margin: 0 10px;
-    cursor: pointer;
-    background-color: rgb(255, 253, 253);
-    color: #463b9c;
-    border: none;
-    border-radius: 10px;
-    transition: all .2s ease-in;
-    font-weight: bold;
 }
 
-.botones-centrados button:hover {
-    background-color: rgb(216, 216, 216);
-    transform: translate(0, -5px);
+.flight-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 3px;
+    border-radius: 5px;
+    height: 6rem;
+    overflow-y: auto;
+    background-color: rgb(255, 255, 255);
 }
+
+.heading {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.detail {
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 3rem;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.buy-flight {
+    padding: 5px 10px;
+    background-color: rgb(60, 185, 66);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bolder;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    width: 10rem;
+}
+
+.buy-flight:hover{
+    background-color: rgb(56, 156, 61);
+    cursor: pointer;
+}
+
+

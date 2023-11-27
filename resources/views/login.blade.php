@@ -16,7 +16,7 @@
                 <button type="submit">Iniciar Sesión</button>
                 <h4 id="register-opt">
                     ¿No tienes una cuenta?
-                    <a id="register" href="#">Regístrate</a>
+                    <a id="register" href="{{route('usuario.register')}}">Regístrate</a>
                 </h4>
             </form>
         </div>

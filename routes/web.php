@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/login', [UsuarioController::class, 'login'])->name('usuario.login');
+Route::get('/home', [UsuarioController::class, 'home'])->name('usuario.home');
+Route::get('/register', [UsuarioController::class, 'register'])->name('usuario.register');
+Route::post('/save', [UsuarioController::class, 'save'])->name('usuario.save');

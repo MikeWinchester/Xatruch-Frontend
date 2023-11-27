@@ -19,20 +19,45 @@
         </nav>
     </header>
 
-    <div class="botones-centrados">
-            <button>
-                <i class="fa-solid fa-plane fa-5x" style="margin-bottom: 30px;"></i>
-                Reservar un vuelo
-            </button>
-            <button>
-                <i class="fa-solid fa-magnifying-glass fa-5x" style="margin-bottom: 30px"></i>
-                Buscar Vuelos
-            </button>
-            <button>
-                <i class="fa-solid fa-bag-shopping fa-5x" style="margin-bottom: 30px"></i>
-                Ofertas y Promociones
-            </button>
-    </div>
+    <footer>
+        <div id="cont-flight">
+            <div class="flight-card">
+                <div class="heading">Vuelo de Ciudad de México a Ottawa</div>
+                <div class="detail">
+                    <div style="margin-bottom: 30px">
+                        Fecha de Salida: <span>23/12/2023</span><br>
+                        Hora de Salida: <span>2:00 PM</span>
+                    </div>
+                    <div class="price">L.12,340</div>
+                </div>
+                <button class="buy-flight">Comprar Boleto</button>
+            </div>
+
+            <div class="flight-card">
+                <div class="heading">Vuelo de Tegucigalpa a San José</div>
+                <div class="detail">
+                    <div style="margin-bottom: 30px">
+                        Fecha de Salida: <span>13/01/2024</span><br>
+                        Hora de Salida: <span>2:00 PM</span>
+                    </div>
+                    <div class="price">L.9,340</div>
+                </div>
+                <button class="buy-flight">Comprar Boleto</button>
+            </div>
+
+            <div class="flight-card">
+                <div class="heading">Vuelo de Paris a Tokyo</div>
+                <div class="detail">
+                    <div style="margin-bottom: 30px">
+                        Fecha de Salida: <span>12/12/2023</span><br>
+                        Hora de Salida: <span>8:00 PM</span>
+                    </div>
+                    <div class="price">L.22,340</div>
+                </div>
+                <button class="buy-flight">Comprar Boleto</button>
+            </div>
+        </div>
+    </footer>
     <script src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 </html>
