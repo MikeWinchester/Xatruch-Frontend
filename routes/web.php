@@ -22,3 +22,5 @@ Route::get('/login', [UsuarioController::class, 'login'])->name('usuario.login')
 Route::get('/home', [UsuarioController::class, 'home'])->name('usuario.home');
 Route::get('/register', [UsuarioController::class, 'register'])->name('usuario.register');
 Route::post('/save', [UsuarioController::class, 'save'])->name('usuario.save');
+Route::get('/register/success', [UsuarioController::class, 'registerSuccess'])->name('usuario.register.success');
+Route::get('/register/failure', [UsuarioController::class, 'registerFailure'])->name('usuario.register.failure');

@@ -20,6 +20,14 @@ class UsuarioController extends Controller
         return view('register');
     }
 
+    public function registerSuccess(){
+        return view('register_success');
+    }
+
+    public function registerFailure(){
+        return view('register_fail');
+    }
+
     public function save(Request $req){
 
         $client = new Client();
@@ -38,7 +46,10 @@ class UsuarioController extends Controller
             ],
         ]);
 
-        return redirect()->route('usuario.login');
-    }
+        if($response->getBody() != ""){
+            return redirect()->route('usuario.register.success');
+        }
 
+        return redirect()->route('usuario.register.failure');
+    }
 }
