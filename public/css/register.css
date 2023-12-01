@@ -103,3 +103,15 @@ input {
     margin: 0;
     font-weight: 500;
 }
+
+#error-correo{
+    color: red;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+#error-cuenta{
+    color: red;
+    margin: 0 0 10px 0;
+    text-align: left;
+}

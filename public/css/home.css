@@ -129,4 +129,78 @@ nav {
     cursor: pointer;
 }
 
+.search-navbar {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    gap: 10px;
+    margin: 3px;
+    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+}
+
+.search-navbar button {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.search-navbar button:hover {
+    background-color: #302776;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 1px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.form-container {
+    overflow: hidden;
+    transition: height 0.3s; 
+    height: 0;
+    flex-direction: column;
+}
+
+.txt {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.box {
+    padding: 10px; 
+    margin-bottom: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-bt {
+    background-color: #6153c9;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.nav-bt:hover {
+    background-color: #302776;
+}
+
+
 

@@ -12,10 +12,6 @@ class UsuarioController extends Controller
         return view('login');
     }
 
-    public function home(){
-        return view('home');
-    }
-
     public function register(){
         return view('register');
     }
@@ -50,6 +46,31 @@ class UsuarioController extends Controller
             return redirect()->route('usuario.register.success');
         }
 
-        return redirect()->route('usuario.register.failure');
+        return view('register');
+    }
+
+    public function home(Request $req){
+
+        $client = new Client();
+
+        $userAuth = [
+            'correo' => $req->input('correo'),
+            'contrasenia' => $req->input('contrasenia')
+        ];
+        
+        $response = $client->post('http://localhost:8080/usuarios/login', [
+            'json' => $userAuth,
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+        ]);
+
+        $response2 = $client->get('http://localhost:8080/vuelos/obtener/todos');
+
+        if($response->getBody() != ""){
+            $usuarioActual = json_decode($response->getBody());
+            $vuelos = json_decode($response2->getBody());
+            return view('home', compact('usuarioActual'), compact('vuelos'));
+        }
     }
 }

@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    max-width: 400px;
+    width: 400px;
     margin: 50px auto;
     background-color: #fff;
     padding: 50px;
@@ -84,4 +84,10 @@ button:hover {
     color: #332885;
     margin: 0;
     font-weight: 500;
+}
+
+#error-correo{
+    color: red;
+    margin: 0 0 10px 0;
+    text-align: left;
 }
