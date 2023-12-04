@@ -20,57 +20,25 @@
     </header>
 
     <footer>
-        <div id="cont-search">
-            <div class="search-navbar">
-                <button class="nav-bt" onclick="toggleFormulario('Ciudad')">Buscar por Ciudad</button>
-                <button class="nav-bt" onclick="toggleFormulario('Fecha')">Buscar por Fecha</button>
-                <button class="nav-bt" onclick="toggleFormulario('Hora')">Buscar por Hora</button>
-            </div>
-        
-            <div class="search-container">
-                <form method="POST" action="{{route('vuelo.ciudades', $usuario->idUsuario)}}" class="form-container" id="formularioCiudad">
-                    @csrf
-                    @method('POST')
-                    <label class="txt" for="origen">Ciudad de Origen:</label>
-                    <input class="box" type="text" id="origen" name="origen" required>
-                    <label class="txt" for="destino">Ciudad de Destino:</label>
-                    <input class="box" type="text" id="destino" name="destino" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioFecha">
-                    <label class="txt" for="fecha">Fecha de Salida:</label>
-                    <input class="box" type="date" id="fecha" name="fecha" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioHora">
-                    <label class="txt" for="hora">Hora de Salida:</label>
-                    <input class="box" type="time" id="hora" name="hora" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-            </div>
-        </div>
         <div id="cont-flight">
-            @foreach ($vuelos as $vuelo)
-                <form class="flight-card" method="GET" action="{{route('boleto.buy', [($usuario->idUsuario), ($vuelo->idVuelo)])}}">
+            @foreach ($boletosDeUsuario as $boleto)
+                <form class="flight-card" method="GET" >
 
                     @csrf
                     @method('GET')
-                    <div class="heading">Vuelo de {{$vuelo->ruta->origen->aeropuerto->ciudad->nombre}} a {{$vuelo->ruta->destino->aeropuerto->ciudad->nombre}}</div>
+                    <div class="heading">Vuelo de {{$boleto->asiento->vuelo->ruta->origen->aeropuerto->ciudad->nombre}} a {{$boleto->asiento->vuelo->ruta->destino->aeropuerto->ciudad->nombre}}</div>
 
                     <div class="detail">
                         <div style="margin-bottom: 30px; flex:2;">
-                            <b>Aeropuerto de Salida:</b> <span>{{$vuelo->ruta->origen->aeropuerto->nombre}}</span><br>
-                            <b>Aeropuerto de Llegada:</b> <span>{{$vuelo->ruta->destino->aeropuerto->nombre}}</span>
+                            <b>Aeropuerto de Salida:</b> <span>{{$boleto->asiento->vuelo->ruta->origen->aeropuerto->nombre}}</span><br>
+                            <b>Aeropuerto de Llegada:</b> <span>{{$boleto->asiento->vuelo->ruta->destino->aeropuerto->nombre}}</span>
                         </div>
                         <div style="margin-bottom: 30px; flex:1;"> 
-                            <b>Fecha de Salida:</b> <span>{{$vuelo->fechaSalida}}</span><br>
-                            <b>Hora de Salida:</b> <span>{{$vuelo->horaSalida}}</span>
+                            <b>Fecha de Salida:</b> <span>{{$boleto->asiento->vuelo->fechaSalida}}</span><br>
+                            <b>Hora de Salida:</b> <span>{{$boleto->asiento->vuelo->horaSalida}}</span>
                         </div>
-                        <div class="price">L.{{number_format((($vuelo->precioTurista)*($vuelo->ruta->kilometros)), 2, '.', ',')}}</div>
                     </div>
-                    <input type="submit" class="buy-flight" value="Comprar Boleto">
+                    <input type="submit" class="buy-flight" value="Ver Boleto">
                 </form>
             @endforeach
         </div>

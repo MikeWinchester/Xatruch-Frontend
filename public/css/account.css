@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(245, 245, 245);
+    font-family: "Google Sans",arial,sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(164, 140, 140, 0.1);
+    text-align: center;
+}
+
+.logo {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.bt {
+    flex: 1;
+    margin: 5px;
+    background-color: #5144b1;
+    width: 100%;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.bt:hover {
+    background-color: #332885;
+    transition: all .1s ease-in;
+}
+
+#register-opt{
+    align-self: center;
+}
+
+#register-opt a{
+    text-decoration: none;
+    color: blue;
+    transition: all .1s ease-in;
+}
+
+#register-opt a:hover{
+    text-decoration: underline;
+    color: purple;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+#cancel-bt{
+    background-color: red;
+    text-decoration: none;
+    
+}
+
+#cancel-bt:hover{
+    background-color: #a43131;
+    transition: all .1s ease-in;
+}
+
+#register-title{
+    color: #332885;
+    margin: 0;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+#error-correo{
+    color: red;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+#error-cuenta{
+    color: red;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5144b1;
+    padding: 15px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all .15s ease-in;
+}
+
+.burger {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.nav-links a:hover{
+    color: rgb(212, 212, 212);
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #5144b1;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+#edit-bt{
+    background-color: rgb(4, 100, 185);
+    text-decoration: none;
+}
+
+#edit-bt:hover{
+    background-color: rgb(4, 64, 116);
+    transition: all .1s ease-in;
+}

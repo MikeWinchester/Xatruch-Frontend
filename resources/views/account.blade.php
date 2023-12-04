@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xatruch Airlines</title>
-    <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}">
-    <script src="https://kit.fontawesome.com/326a1ae492.js" crossorigin="anonymous"></script>
+    <title>Xatruch Airlines | Registro</title>
+    <link rel="stylesheet" href="{{ URL::asset('css/account.css') }}">
 </head>
 <body>
     <header>
@@ -19,63 +18,49 @@
         </nav>
     </header>
 
-    <footer>
-        <div id="cont-search">
-            <div class="search-navbar">
-                <button class="nav-bt" onclick="toggleFormulario('Ciudad')">Buscar por Ciudad</button>
-                <button class="nav-bt" onclick="toggleFormulario('Fecha')">Buscar por Fecha</button>
-                <button class="nav-bt" onclick="toggleFormulario('Hora')">Buscar por Hora</button>
-            </div>
-        
-            <div class="search-container">
-                <form method="POST" action="{{route('vuelo.ciudades', $usuario->idUsuario)}}" class="form-container" id="formularioCiudad">
-                    @csrf
-                    @method('POST')
-                    <label class="txt" for="origen">Ciudad de Origen:</label>
-                    <input class="box" type="text" id="origen" name="origen" required>
-                    <label class="txt" for="destino">Ciudad de Destino:</label>
-                    <input class="box" type="text" id="destino" name="destino" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioFecha">
-                    <label class="txt" for="fecha">Fecha de Salida:</label>
-                    <input class="box" type="date" id="fecha" name="fecha" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioHora">
-                    <label class="txt" for="hora">Hora de Salida:</label>
-                    <input class="box" type="time" id="hora" name="hora" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-            </div>
+    <div class="container">
+        <h1 id="register-title">Mi Cuenta</h1>
+        <form id="login-form" method="  POST" action="{{route('usuario.edit', $usuario->idUsuario)}}">
+            @csrf
+            @method('POST')
+            <input type="text" id="nombre" name="nombre" value="{{$usuario->nombre}}" readonly>
+            <input type="text" id="apellido" name="apellido" value="{{$usuario->apellido}}" readonly>
+            <input type="email" id="correo" name="correo" value="{{$usuario->correo}}" onchange="validateEmail()" readonly>
+            <h6 id="error-correo">Por favor, ingresa un correo electrónico válido.</h6>
+            <input type="password" id="contrasenia" name="contrasenia" value="{{$usuario->contrasenia}}" readonly>
+            <h6 id="error-cuenta">Ya existe una cuenta vinculada a ese correo electrónico.</h6>
+        </form>
+        <div class="buttons">
+            <input type="submit" form="login-form" value="Guardar" class="bt">
+            <button class="bt" id="edit-bt" onclick="edit()">Editar</button>
+            <a class="bt" id="cancel-bt" href="{{route('usuario.delete', $usuario->idUsuario)}}">Eliminar mi cuenta</a>
         </div>
-        <div id="cont-flight">
-            @foreach ($vuelos as $vuelo)
-                <form class="flight-card" method="GET" action="{{route('boleto.buy', [($usuario->idUsuario), ($vuelo->idVuelo)])}}">
+    </div>
+    <script>
+        document.getElementById('error-cuenta').style.display = 'none';
+        document.getElementById('error-correo').style.display = 'none';
 
-                    @csrf
-                    @method('GET')
-                    <div class="heading">Vuelo de {{$vuelo->ruta->origen->aeropuerto->ciudad->nombre}} a {{$vuelo->ruta->destino->aeropuerto->ciudad->nombre}}</div>
+        function validateEmail(){
+            const email = document.getElementById('correo').value;
+            const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const result = regex.test(email);
+            if(!result){
+                document.getElementById('error-correo').style.display = 'block';
+            }else{
+                document.getElementById('error-correo').style.display = 'none';
+            }
+        }
 
-                    <div class="detail">
-                        <div style="margin-bottom: 30px; flex:2;">
-                            <b>Aeropuerto de Salida:</b> <span>{{$vuelo->ruta->origen->aeropuerto->nombre}}</span><br>
-                            <b>Aeropuerto de Llegada:</b> <span>{{$vuelo->ruta->destino->aeropuerto->nombre}}</span>
-                        </div>
-                        <div style="margin-bottom: 30px; flex:1;"> 
-                            <b>Fecha de Salida:</b> <span>{{$vuelo->fechaSalida}}</span><br>
-                            <b>Hora de Salida:</b> <span>{{$vuelo->horaSalida}}</span>
-                        </div>
-                        <div class="price">L.{{number_format((($vuelo->precioTurista)*($vuelo->ruta->kilometros)), 2, '.', ',')}}</div>
-                    </div>
-                    <input type="submit" class="buy-flight" value="Comprar Boleto">
-                </form>
-            @endforeach
-        </div>
-    </footer>
-    <script src="{{ URL::asset('js/app.js') }}"></script>
-    
+        function edit(){
+
+            var form = document.getElementById('login-form');
+
+            var inputs = form.getElementsByTagName('input');
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].removeAttribute('readonly');
+            }
+        }
+    </script>
 </body>
 </html>

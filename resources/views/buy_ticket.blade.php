@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xatruch Airlines</title>
-    <link rel="stylesheet" href="{{ URL::asset('css/home.css') }}">
-    <script src="https://kit.fontawesome.com/326a1ae492.js" crossorigin="anonymous"></script>
+    <title>Mostrar Asientos</title>
+    <link rel="stylesheet" href="{{URL::asset('css/tickets.css')}}">
 </head>
 <body>
     <header>
@@ -18,64 +17,92 @@
             <div class="burger">&#9776;</div>
         </nav>
     </header>
+    @php
+    $asientosPorLetra = [];
+    foreach ($asientos as $asiento) {
+        $letra = strtoupper(substr(($asiento->numero), 0, 1));
+        $asientosPorLetra[$letra][] = $asiento;
+    }
+    @endphp
 
-    <footer>
-        <div id="cont-search">
-            <div class="search-navbar">
-                <button class="nav-bt" onclick="toggleFormulario('Ciudad')">Buscar por Ciudad</button>
-                <button class="nav-bt" onclick="toggleFormulario('Fecha')">Buscar por Fecha</button>
-                <button class="nav-bt" onclick="toggleFormulario('Hora')">Buscar por Hora</button>
+    <div id="title">
+        <h2>Seleccionar asiento para el vuelo de {{$asientos[0]->vuelo->ruta->origen->aeropuerto->ciudad->nombre}} a {{$asientos[0]->vuelo->ruta->destino->aeropuerto->ciudad->nombre}}</h2>
+    </div>
+
+    <div id="legend">
+        <div>
+            <div class="symb-cont">
+                <div class="symb disponible"></div>
+                <span>Asiento disponible</span>
             </div>
-        
-            <div class="search-container">
-                <form method="POST" action="{{route('vuelo.ciudades', $usuario->idUsuario)}}" class="form-container" id="formularioCiudad">
-                    @csrf
-                    @method('POST')
-                    <label class="txt" for="origen">Ciudad de Origen:</label>
-                    <input class="box" type="text" id="origen" name="origen" required>
-                    <label class="txt" for="destino">Ciudad de Destino:</label>
-                    <input class="box" type="text" id="destino" name="destino" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioFecha">
-                    <label class="txt" for="fecha">Fecha de Salida:</label>
-                    <input class="box" type="date" id="fecha" name="fecha" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
-        
-                <form class="form-container" id="formularioHora">
-                    <label class="txt" for="hora">Hora de Salida:</label>
-                    <input class="box" type="time" id="hora" name="hora" required>
-                    <button class="nav-bt" type="submit">Buscar Vuelos</button>
-                </form>
+            
+            <div class="symb-cont">
+                <div class="symb no-disponible"></div>
+                <span>Asiento no disponible</span>
+            </div>      
+        </div>      
+    </div>
+
+    <div id="asientos-container">
+        @foreach ($asientosPorLetra as $letra => $asientosLetra)
+            <div class="clase-container">
+                <div class="title">
+                    @switch($letra)
+                        @case("A")
+                            Primera Clase
+                            @break
+                        @case("B")
+                            Clase Ejecutiva
+                            @break
+                        @case("C")
+                            Clase Turista
+                            @break
+                        @default
+                    @endswitch
+                </div>
+                <br>
+
+                @php
+                    $contadorAsientos = 0;
+                @endphp
+
+                @foreach ($asientosLetra as $asiento)
+                    <form onclick="selectSeat('seat{{$asiento->idAsiento}}')" id="seat{{$asiento->idAsiento}}" class="asiento {{ $asiento->disponible ? 'disponible' : 'no-disponible' }}" {{ $asiento->disponible ? '' : 'disabled' }} method="GET" action="{{route('boleto.success', [($usuario->idUsuario), ($asiento->vuelo->idVuelo), ($asiento->numero)])}}">
+                        {{ $asiento->numero }}
+                    </form>
+
+                    @php
+                        $contadorAsientos++;
+                        if ($contadorAsientos % 5 == 0) {
+                            echo '<br>';
+                        }
+                    @endphp
+                @endforeach
             </div>
-        </div>
-        <div id="cont-flight">
-            @foreach ($vuelos as $vuelo)
-                <form class="flight-card" method="GET" action="{{route('boleto.buy', [($usuario->idUsuario), ($vuelo->idVuelo)])}}">
+        @endforeach
+        <h3 style="text-align: center; margin: 0;">Escalas</h3>
+        <div id="scale-cont">
+            @foreach ($escalas as $escala)
+            <div class="flight-card">
 
-                    @csrf
-                    @method('GET')
-                    <div class="heading">Vuelo de {{$vuelo->ruta->origen->aeropuerto->ciudad->nombre}} a {{$vuelo->ruta->destino->aeropuerto->ciudad->nombre}}</div>
+                <div class="heading">Escala en {{$escala->escala->aeropuerto->ciudad->nombre}}</div>
 
-                    <div class="detail">
-                        <div style="margin-bottom: 30px; flex:2;">
-                            <b>Aeropuerto de Salida:</b> <span>{{$vuelo->ruta->origen->aeropuerto->nombre}}</span><br>
-                            <b>Aeropuerto de Llegada:</b> <span>{{$vuelo->ruta->destino->aeropuerto->nombre}}</span>
-                        </div>
-                        <div style="margin-bottom: 30px; flex:1;"> 
-                            <b>Fecha de Salida:</b> <span>{{$vuelo->fechaSalida}}</span><br>
-                            <b>Hora de Salida:</b> <span>{{$vuelo->horaSalida}}</span>
-                        </div>
-                        <div class="price">L.{{number_format((($vuelo->precioTurista)*($vuelo->ruta->kilometros)), 2, '.', ',')}}</div>
+                <div class="detail">
+                    <div style="margin-bottom: 30px; flex:1;">
+                        <b>Aeropuerto de Salida:</b> <span>{{$escala->escala->aeropuerto->nombre}}</span><br> 
+                        <b>Fecha de Salida:</b> <span>{{$escala->escala->fechaSalida}}</span><br>
+                        <b>Hora de Salida:</b> <span>{{$escala->escala->horaSalida}}</span>
                     </div>
-                    <input type="submit" class="buy-flight" value="Comprar Boleto">
-                </form>
+                </div>
+            </div>
             @endforeach
         </div>
-    </footer>
-    <script src="{{ URL::asset('js/app.js') }}"></script>
-    
+    </div>
+
+    <div class="buttons">
+        <input id="confirm-bt" form="" type="submit" value="Comprar Boleto" class="bt" disabled>
+        <a class="bt" id="cancel-bt" href="{{route('usuario.homeScreen', $usuario->idUsuario)}}">Cancelar</a>
+    </div>
+    <script src="{{URL::asset('js/tickets.js')}}"></script>
 </body>
 </html>

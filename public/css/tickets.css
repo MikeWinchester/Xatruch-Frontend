@@ -1,0 +1,215 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(245, 245, 245);
+    font-family: "Google Sans",arial,sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5144b1;
+    padding: 15px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all .15s ease-in;
+}
+
+.burger {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.nav-links a:hover{
+    color: rgb(212, 212, 212);
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #5144b1;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+.clase-container {
+    display: inline-block;
+    margin: 20px;
+    vertical-align: top;
+}
+
+.clase-container .title{
+    font-weight: bold;
+}
+
+.asiento {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 14px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+
+.disponible {
+    background-color: #6758d6;
+    color: white;
+}
+
+.disponible:hover{
+    background-color: #44389e;
+}
+
+.no-disponible {
+    background-color: rgb(129, 129, 129);
+    color: white;
+}
+
+#asientos-container{
+    text-align: center;
+}    
+
+#title{
+    text-align: center;
+}
+
+.symb-cont {
+    display: flex;
+    align-items: center;
+}
+
+.symb {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    margin: 3px 10px;
+}
+
+#legend{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#cont-flight {
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: rgb(255, 255, 255);
+    width: auto;
+
+}
+
+.heading {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.detail {
+    font-size: 12px;
+    display: flex;
+    height: 3rem;
+}
+
+#scale-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#cancel-bt{
+    background-color: red;
+    text-decoration: none;  
+}
+
+#cancel-bt:hover{
+    background-color: #a43131;
+    transition: all .1s ease-in;
+}
+
+.bt {
+    margin: 5px;
+    width: 20%;
+    background-color: #766aca;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.asiento.selected {
+    background-color: #3498db;
+    color: #fff;
+}
